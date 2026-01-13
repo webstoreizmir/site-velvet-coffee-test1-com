@@ -1,0 +1,51 @@
+---
+interface Service {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface Props {
+  services: Service[];
+  featureKeywords: string[];
+}
+
+const { services } = Astro.props;
+---
+
+<section id="services" class="py-32 bg-slate-50 relative overflow-hidden">
+  <div class="container-custom relative z-10">
+    <div class="max-w-2xl mb-16">
+      <span class="text-[rgb(var(--color-primary))] font-bold tracking-wider uppercase text-sm mb-2 block">Hizmetlerimiz</span>
+      <h2 class="text-3xl md:text-5xl font-heading font-bold text-slate-900 mb-6">
+        Size Nasıl Değer Katabiliriz?
+      </h2>
+      <p class="text-slate-600 text-lg">İhtiyaçlarınıza özel, modern ve ölçeklenebilir çözümler sunuyoruz.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {services.map((service) => (
+        <div class="group bg-white p-8 rounded-3xl hover:shadow-2xl hover:shadow-[rgb(var(--color-primary))]/5 transition-all duration-300 border border-slate-100 hover:-translate-y-2 relative overflow-hidden">
+            <!-- Arkaplan Efekti -->
+            <div class="absolute top-0 right-0 w-24 h-24 bg-[rgb(var(--color-primary))] opacity-5 rounded-bl-full transform translate-x-4 -translate-y-4 group-hover:scale-150 transition-transform duration-500"></div>
+
+            <!-- İkon Kutusu -->
+            <div class="w-16 h-16 rounded-2xl bg-[rgb(var(--color-primary))]/10 flex items-center justify-center text-4xl mb-8 text-[rgb(var(--color-primary))] group-hover:bg-[rgb(var(--color-primary))] group-hover:text-white transition-all duration-300 shadow-sm">
+                {service.icon}
+            </div>
+
+            <h3 class="text-xl font-heading font-bold mb-4 text-slate-900">
+                {service.title}
+            </h3>
+            <p class="text-slate-600 leading-relaxed mb-6">
+                {service.description}
+            </p>
+            
+            <a href="#contact" class="inline-flex items-center text-[rgb(var(--color-primary))] font-semibold text-sm group-hover:translate-x-2 transition-transform">
+                Daha Fazla Bilgi <span class="ml-2">&rarr;</span>
+            </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,521 @@
+{
+  "name": "Custom Domain WaaS v18 (JSON Guardian)",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Gj-Pnn9kLSMInJmdB0Abt9YyLi3YQ1zuhFuXWRJ_Vig",
+          "mode": "list",
+          "cachedResultName": "WaaS Müşteri Takip",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Gj-Pnn9kLSMInJmdB0Abt9YyLi3YQ1zuhFuXWRJ_Vig/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sayfa1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Gj-Pnn9kLSMInJmdB0Abt9YyLi3YQ1zuhFuXWRJ_Vig/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Tarih": "={{ new Date().toLocaleString(\"tr-TR\") }}",
+            "İşletme Adı": "={{ $('Webhook').item.json.body.businessName }}",
+            "Domain": "={{ $('Webhook').item.json.body.customDomain }}",
+            "Sektör": "={{ $('Webhook').item.json.body.sector }}",
+            "Müşteri E-Posta": "={{ $('Webhook').item.json.body.email }}",
+            "Telefon": "={{ $('Webhook').item.json.body.phone }}",
+            "Durum": "Bekliyor",
+            "Repo Linki": "={{ 'https://github.com/webstoreizmir/' + $('Process Data').item.json.repoName }}",
+            "Canlı Site Linki": "={{ 'https://' + $('Process Data').item.json.repoName + '.vercel.app' }}",
+            "Ödeme Linki": "=https://www.shopier.com/ShowProductNew/products.php?id=43115248"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Tarih",
+              "displayName": "Tarih",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "İşletme Adı",
+              "displayName": "İşletme Adı",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Domain",
+              "displayName": "Domain",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Sektör",
+              "displayName": "Sektör",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Müşteri E-Posta",
+              "displayName": "Müşteri E-Posta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Telefon",
+              "displayName": "Telefon",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Repo Linki",
+              "displayName": "Repo Linki",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Canlı Site Linki",
+              "displayName": "Canlı Site Linki",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Durum",
+              "displayName": "Durum",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Ödeme Linki",
+              "displayName": "Ödeme Linki",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "507f734c-09d2-49a7-9341-a8e913dfe0ef",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1440,
+        32
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Zcqv0jMV3tS0GPG7",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "crate-site",
+        "options": {}
+      },
+      "id": "c1109679-f0b8-45e0-b3f2-37d43efb23f1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        -560,
+        32
+      ],
+      "webhookId": "451def7a-ff11-45c1-b1f0-15dec8491d37"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.github.com/repos/webstoreizmir/ai-agency-template/generate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"owner\": \"webstoreizmir\",\n  \"name\": \"{{ 'site-' + $('Webhook').item.json.body.customDomain.replace(/\\./g, '-').toLowerCase().trim() }}\",\n  \"description\": \"Otomatik oluşturulan site: {{ $('Webhook').item.json.body.businessName }}\",\n  \"private\": false\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -336,
+        32
+      ],
+      "id": "b5562354-f6a0-49a9-aa1c-3b3082083cc5",
+      "name": "Github Create Repo",
+      "credentials": {
+        "githubApi": {
+          "id": "eYbgPgcmskvVG5ZJ",
+          "name": "GitHub account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "amount": 60
+      },
+      "id": "82c11d39-f982-4fee-99bb-d12b9c6cf757",
+      "name": "Wait 60s",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -112,
+        32
+      ],
+      "webhookId": "23d13233-2287-4345-934d-8c1737f1e72b"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyB4Lnx_HqtLRzzpduB7AZf_nVR0W-j7OwE",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"text\": \"SEN: Dünyanın en iyi UX/UI tasarımcısı, SEO uzmanı ve metin yazarısın. Görevin, müşteriden gelen bilgilere göre eksiksiz, dolu dolu ve profesyonel bir web sitesi JSON konfigürasyonu oluşturmaktır.\\n\\nMÜŞTERİ GİRDİLERİ:\\n- İşletme Adı: {{ $('Webhook').item.json.body.businessName.replace(/\\\"/g, '\\\\\\\"') }}\\n- Sektör: {{ $('Webhook').item.json.body.sector.replace(/\\\"/g, '\\\\\\\"') }}\\n- Vizyon/Tanım: {{ $('Webhook').item.json.body.description.replace(/\\\"/g, '\\\\\\\"') }}\\n- Hizmetler: {{ $('Webhook').item.json.body.servicesList.replace(/\\\"/g, '\\\\\\\"') }}\\n- Neden Biz: {{ $('Webhook').item.json.body.whyUs.replace(/\\\"/g, '\\\\\\\"') }}\\n- Yorumlar: {{ $('Webhook').item.json.body.testimonials.replace(/\\\"/g, '\\\\\\\"') }}\\n- İletişim: {{ $('Webhook').item.json.body.phone }}, {{ $('Webhook').item.json.body.email }}, {{ $('Webhook').item.json.body.address.replace(/\\\"/g, '\\\\\\\"') }}\\n- Hedef Kitle: {{ $('Webhook').item.json.body.targetAudience.replace(/\\\"/g, '\\\\\\\"') }}\\n- Tasarım Tarzı: {{ $('Webhook').item.json.body.designStyle }}\\n- Renk Tercihi: {{ $('Webhook').item.json.body.colorPreference }}\\n- Logo URL: {{ $('Webhook').item.json.body.logoUrl }}\\n- Kapak URL: {{ $('Webhook').item.json.body.heroImageUrl }}\\n\\nKRİTİK GÖREVLERİN:\\n1. **GÖRSEL PROMPT OLUŞTURMA:** 'images' kısmına, sektöre uygun İngilizce görsel arama anahtar kelimeleri yaz. (Örn: 'modern dental clinic interior bright').\\n2. **ZENGİN İÇERİK YARATMA (ÖNEMLİ):** \\n   - 'process' dizisine bu sektör için mantıklı 3 adımlı bir çalışma süreci uydur (Örn: 1. Keşif, 2. Uygulama, 3. Teslim).\\n   - 'faq' dizisine bu sektörle ilgili müşterilerin sorabileceği 4 adet Sıkça Sorulan Soru ve profesyonel cevaplarını yaz.\\n3. **PROFESYONEL DİL:** Satış odaklı, güven verici bir dil kullan.\\n\\nÇIKTI FORMATI (JSON):\\nDİKKAT: JSON formatını asla bozma. Her parantezi kapat. Tırnak işaretlerine dikkat et.\\n\\n{\\n  \\\"metadata\\\": {\\n    \\\"title\\\": \\\"[İşletme Adı] | [Slogan]\\\",\\n    \\\"description\\\": \\\"[SEO Açıklaması]\\\"\\n  },\\n  \\\"theme\\\": {\\n    \\\"colors\\\": {\\n      \\\"primary\\\": \\\"[Ana Renk HEX]\\\",\\n      \\\"secondary\\\": \\\"[İkincil Renk HEX]\\\",\\n      \\\"background\\\": \\\"[Arka Plan HEX]\\\",\\n      \\\"text\\\": \\\"[Yazı Rengi HEX]\\\"\\n    },\\n    \\\"fonts\\\": {\\n      \\\"heading\\\": \\\"[Google Font]\\\",\\n      \\\"body\\\": \\\"[Google Font]\\\"\\n    },\\n    \\\"style\\\": \\\"modern\\\"\\n  },\\n  \\\"images\\\": {\\n    \\\"hero_keyword\\\": \\\"[Hero Banner için İngilizce görsel prompt]\\\",\\n    \\\"about_keyword\\\": \\\"[Hakkımızda resmi için İngilizce prompt]\\\",\\n    \\\"feature_keywords\\\": [\\\"[Hizmet 1 prompt]\\\", \\\"[Hizmet 2 prompt]\\\", \\\"[Hizmet 3 prompt]\\\"]\\n  },\\n  \\\"content\\\": {\\n    \\\"hero\\\": {\\n      \\\"headline\\\": \\\"[Manşet]\\\",\\n      \\\"subheadline\\\": \\\"[Alt Manşet]\\\",\\n      \\\"ctaButtonText\\\": \\\"Teklif Alın\\\"\\n    },\\n    \\\"about\\\": {\\n      \\\"title\\\": \\\"[Hakkımızda Başlığı]\\\",\\n      \\\"description\\\": \\\"[Detaylı Şirket Tanıtımı]\\\",\\n      \\\"stats\\\": [\\n        { \\\"label\\\": \\\"[İstatistik 1 Adı]\\\", \\\"value\\\": \\\"[Değer]\\\" },\\n        { \\\"label\\\": \\\"[İstatistik 2 Adı]\\\", \\\"value\\\": \\\"[Değer]\\\" }\\n      ]\\n    },\\n    \\\"services\\\": [\\n      { \\\"title\\\": \\\"[Hizmet 1]\\\", \\\"description\\\": \\\"[Açıklama]\\\", \\\"icon\\\": \\\"✨\\\" },\\n      { \\\"title\\\": \\\"[Hizmet 2]\\\", \\\"description\\\": \\\"[Açıklama]\\\", \\\"icon\\\": \\\"🚀\\\" },\\n      { \\\"title\\\": \\\"[Hizmet 3]\\\", \\\"description\\\": \\\"[Açıklama]\\\", \\\"icon\\\": \\\"💼\\\" }\\n    ],\\n    \\\"process\\\": [\\n      { \\\"step\\\": \\\"01\\\", \\\"title\\\": \\\"[Adım 1 Başlık]\\\", \\\"description\\\": \\\"[Açıklama]\\\" },\\n      { \\\"step\\\": \\\"02\\\", \\\"title\\\": \\\"[Adım 2 Başlık]\\\", \\\"description\\\": \\\"[Açıklama]\\\" },\\n      { \\\"step\\\": \\\"03\\\", \\\"title\\\": \\\"[Adım 3 Başlık]\\\", \\\"description\\\": \\\"[Açıklama]\\\" }\\n    ],\\n    \\\"faq\\\": [\\n      { \\\"question\\\": \\\"[Soru 1]\\\", \\\"answer\\\": \\\"[Cevap 1]\\\" },\\n      { \\\"question\\\": \\\"[Soru 2]\\\", \\\"answer\\\": \\\"[Cevap 2]\\\" },\\n      { \\\"question\\\": \\\"[Soru 3]\\\", \\\"answer\\\": \\\"[Cevap 3]\\\" },\\n      { \\\"question\\\": \\\"[Soru 4]\\\", \\\"answer\\\": \\\"[Cevap 4]\\\" }\\n    ],\\n    \\\"testimonials\\\": [\\n      { \\\"name\\\": \\\"[Müşteri Adı]\\\", \\\"role\\\": \\\"[Ünvan]\\\", \\\"comment\\\": \\\"[Yorum]\\\" }\\n    ],\\n    \\\"contact\\\": {\\n      \\\"address\\\": \\\"{{ $('Webhook').item.json.body.address.replace(/\\\"/g, '\\\\\\\"') }}\\\",\\n      \\\"phone\\\": \\\"{{ $('Webhook').item.json.body.phone }}\\\",\\n      \\\"email\\\": \\\"{{ $('Webhook').item.json.body.email }}\\\",\\n      \\\"map_query\\\": \\\"[Şehir/Semt]\\\"\\n    }\\n  }\\n}\\n\\nSADECE JSON DÖNDÜR.\"\n        }\n      ]\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "e2c26883-6137-415a-86cb-ad564bdc3132",
+      "name": "Gemini Generate Content",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        112,
+        32
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Gemini'den gelen veriyi al\nlet rawContent = \"\";\n\ntry {\n  if (items[0].json.candidates && items[0].json.candidates[0].content) {\n    rawContent = items[0].json.candidates[0].content.parts[0].text;\n  } else if (items[0].json.text) {\n    rawContent = items[0].json.text;\n  } else {\n    rawContent = JSON.stringify(items[0].json);\n  }\n} catch (error) {\n  throw new Error(\"Gemini verisi okunamadı.\");\n}\n\n// Temizlik\nrawContent = rawContent.replace(/```json/g, \"\").replace(/```/g, \"\").trim();\n\n// JSON Düzeltme (Eğer Gemini sonunda } unuttuysa)\nif (!rawContent.endsWith('}')) {\n    const lastClose = rawContent.lastIndexOf('}');\n    if (lastClose !== -1) {\n        rawContent = rawContent.substring(0, lastClose + 1);\n    } else {\n        // Acil durum: Elle kapat\n        rawContent += '}}}'; \n    }\n}\n\nlet parsedData = {};\ntry {\n  parsedData = JSON.parse(rawContent);\n} catch (e) {\n    // Çok büyük ihtimalle eksik virgül veya parantez var\n    // Basit bir temizlik daha yapalım\n    try {\n        // Son virgülü silmeyi dene\n        rawContent = rawContent.replace(/,(\\s*})/, '$1');\n        parsedData = JSON.parse(rawContent);\n    } catch (e2) {\n        throw new Error(\"JSON parse hatası: \" + rawContent);\n    }\n}\n\nconst webhookData = $('Webhook').item.json.body;\n\n// Eğer Gemini'den gelen veride eksik varsa, varsayılan değerlerle tamamla (Hata önleyici)\nif (!parsedData.metadata) parsedData.metadata = { title: webhookData.businessName, description: \"\" };\nif (!parsedData.theme) parsedData.theme = { colors: { primary: \"#000\", secondary: \"#333\", background: \"#fff\", text: \"#000\" }, fonts: { heading: \"Inter\", body: \"Inter\" }, style: \"modern\" };\nif (!parsedData.images) parsedData.images = { hero_keyword: \"business\", about_keyword: \"team\", feature_keywords: [] };\nif (!parsedData.content) parsedData.content = { hero: {}, about: {}, services: [], testimonials: [], contact: {} };\n\n// Repo ismini oluştur\nconst repoName = 'site-' + webhookData.customDomain.replace(/\\./g, '-').toLowerCase().trim();\n\nreturn [\n  {\n    json: {\n      repoName: repoName,\n      siteConfig: parsedData,\n      customDomain: webhookData.customDomain,\n      businessName: webhookData.businessName\n    }\n  }\n];"
+      },
+      "id": "5c8ce81d-dc8f-4d2d-afa9-7795869753d0",
+      "name": "Process Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        336,
+        32
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.vercel.com/v9/projects",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $('Process Data').item.json.repoName.toLowerCase() }}\",\n  \"framework\": \"astro\",\n  \"gitRepository\": {\n    \"type\": \"github\",\n    \"repo\": \"webstoreizmir/{{ $('Process Data').item.json.repoName }}\"\n  }\n}",
+        "options": {}
+      },
+      "id": "3de695ea-699a-4927-8ff2-ed72aa65ee65",
+      "name": "Vercel Create Project",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        560,
+        32
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "v4z26KDhdP8OaJ4y",
+          "name": "Header Auth account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.vercel.com/v9/projects/{{ 'site-' + $('Webhook').item.json.body.customDomain.replace(/\\./g, '-').toLowerCase().trim() }}/domains",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $('Webhook').item.json.body.customDomain }}\"\n}",
+        "options": {}
+      },
+      "id": "b88e3d79-8c17-4df3-a9a7-72819b23c59f",
+      "name": "Vercel Add Custom Domain",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        768,
+        32
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "v4z26KDhdP8OaJ4y",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": "webstoreizmir",
+        "repository": "={{ $('Process Data').item.json.repoName }}",
+        "filePath": "src/data/site-config.json",
+        "additionalParameters": {
+          "reference": "main"
+        }
+      },
+      "id": "9b555566-2acf-4698-8277-2bd5198d77e9",
+      "name": "Get Config SHA",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        992,
+        32
+      ],
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "webhookId": "60ee6aed-08d2-4041-92ce-bcdc67247c22",
+      "credentials": {
+        "githubApi": {
+          "id": "eYbgPgcmskvVG5ZJ",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "edit",
+        "owner": "webstoreizmir",
+        "repository": {
+          "__rl": true,
+          "value": "={{ $('Process Data').item.json.repoName }}",
+          "mode": ""
+        },
+        "filePath": "src/data/site-config.json",
+        "fileContent": "={{ JSON.stringify($('Process Data').item.json.siteConfig, null, 2) }}",
+        "commitMessage": "Update site content for {{ $('Process Data').json.businessName }}"
+      },
+      "id": "3f6de1ec-4229-4a84-8381-1f8461360567",
+      "name": "Update Config",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        1216,
+        32
+      ],
+      "webhookId": "2df076a3-e383-4c50-b1b6-d70f86386674",
+      "credentials": {
+        "githubApi": {
+          "id": "eYbgPgcmskvVG5ZJ",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook').item.json.body.email }}",
+        "subject": "=🚀 Siteniz Hazır! İşlem Rehberi - {{ $('Webhook').item.json.body.businessName }}",
+        "message": "=<div style=\"font-family: 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">\n    \n    <!-- Header -->\n    <div style=\"background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 40px 30px; text-align: center;\">\n        <h1 style=\"color: #38bdf8; margin: 0; font-size: 28px; letter-spacing: -0.5px;\">Siteniz Oluşturuldu! 🚀</h1>\n        <p style=\"color: #94a3b8; margin-top: 10px; font-size: 16px;\">{{ $('Webhook').item.json.body.businessName }} kurulumu tamamlandı.</p>\n    </div>\n\n    <!-- Content -->\n    <div style=\"padding: 40px 30px;\">\n        <p style=\"color: #334155; font-size: 16px; line-height: 1.6; margin-top: 0;\">Merhaba,</p>\n        <p style=\"color: #334155; font-size: 16px; line-height: 1.6;\">Yapay zeka sistemimiz web sitenizi tasarladı, kodladı ve sunucuya yükledi. Tasarım ve içerikler sektörünüze özel olarak hazırlandı. ✨</p>\n        \n        <!-- Preview Box -->\n        <div style=\"background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 30px 0;\">\n            <p style=\"margin: 0; color: #64748b; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;\">CANLI ÖNİZLEME</p>\n            <a href=\"https://{{ $('Process Data').item.json.repoName }}.vercel.app\" target=\"_blank\" style=\"display: block; margin-top: 5px; color: #2563eb; font-size: 18px; font-weight: bold; text-decoration: none;\">\n                👉 Siteyi Görüntülemek İçin Tıklayın\n            </a>\n        </div>\n\n        <p style=\"color: #334155; font-size: 16px; line-height: 1.6;\">Sitenizin <strong>{{ $('Webhook').item.json.body.customDomain }}</strong> adresinde kalıcı olarak yayınlanması için aktivasyon işlemini tamamlamanız gerekmektedir.</p>\n\n        <!-- Payment Button -->\n        <div style=\"text-align: center; margin: 40px 0;\">\n            <a href=\"https://www.shopier.com/ShowProductNew/products.php?id=43115248\" style=\"background-color: #10b981; color: white; padding: 18px 35px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; display: inline-block; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);\">\n                💳 Ödemeyi Tamamla ve Aktifleştir\n            </a>\n            <p style=\"font-size: 13px; color: #94a3b8; margin-top: 15px;\">Shopier güvencesiyle 3D Secure ödeme.</p>\n        </div>\n\n        <hr style=\"border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;\">\n\n        <!-- DNS Info -->\n        <div style=\"background-color: #fff1f2; padding: 20px; border-radius: 8px; border-left: 4px solid #f43f5e;\">\n            <h4 style=\"margin: 0 0 10px 0; color: #be123c;\">⚠️ Önemli: DNS Ayarı</h4>\n            <p style=\"font-size: 14px; color: #881337; margin: 0;\">\n                Domain panelinizden <strong>A Kaydı</strong> olarak <strong>76.76.21.21</strong> IP adresini tanımlamayı unutmayınız.\n            </p>\n        </div>\n\n        <p style=\"font-size: 14px; color: #64748b; margin-top: 30px; text-align: center;\">\n            Sorularınız için bu e-postayı yanıtlayabilirsiniz.<br>\n            <strong>İzmir WebStore Ekibi</strong>\n        </p>\n    </div>\n</div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1680,
+        32
+      ],
+      "id": "330019e8-6f46-45f5-b7dc-6abc3a6d9c83",
+      "name": "Send a message",
+      "webhookId": "19e0e4b3-28c8-4020-8575-843127e03e30",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "caqFltmVBL1BKvdO",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const processData = $('Process Data').item.json;\nconst vercelProject = $('Vercel Create Project').item.json;\n\nreturn {\n  json: {\n    status: 'success',\n    message: 'Site başarıyla oluşturuldu!',\n    businessName: processData.businessName,\n    customDomain: processData.customDomain,\n    repository: `https://github.com/webstoreizmir/${processData.repoName}`,\n    deploymentUrl: `https://${processData.customDomain}`,\n    previewUrl: `https://${processData.repoName}.vercel.app`\n  }\n};"
+      },
+      "id": "508f22ce-3119-404c-aa78-0aaa79d91157",
+      "name": "Send Success Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1888,
+        32
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Github Create Repo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Github Create Repo": {
+      "main": [
+        [
+          {
+            "node": "Wait 60s",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 60s": {
+      "main": [
+        [
+          {
+            "node": "Gemini Generate Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Generate Content": {
+      "main": [
+        [
+          {
+            "node": "Process Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Data": {
+      "main": [
+        [
+          {
+            "node": "Vercel Create Project",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vercel Create Project": {
+      "main": [
+        [
+          {
+            "node": "Vercel Add Custom Domain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vercel Add Custom Domain": {
+      "main": [
+        [
+          {
+            "node": "Get Config SHA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Config SHA": {
+      "main": [
+        [
+          {
+            "node": "Update Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Config": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Send Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "28704726-d691-4ce1-8c72-d50f11cc09aa",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "425220bd801422123c3725d58a33a4343f2f11b17e89c94ab48dd342c40ee6b4"
+  },
+  "id": "TrCo0RLfgB0J1OsP",
+  "tags": []
+}

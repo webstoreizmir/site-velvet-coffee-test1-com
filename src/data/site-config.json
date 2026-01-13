@@ -1,0 +1,120 @@
+{
+  "is_paid": false,
+  "metadata": {
+    "title": "Modern Ajans Pro",
+    "description": "Profesyonel dijital çözümler."
+  },
+  "theme": {
+    "colors": {
+      "primary": "#2563eb",
+      "secondary": "#1e40af",
+      "background": "#0f172a",
+      "text": "#f8fafc"
+    },
+    "fonts": {
+      "heading": "Montserrat",
+      "body": "Inter"
+    },
+    "style": "modern"
+  },
+  "images": {
+    "hero_keyword": "modern office architecture glass",
+    "about_keyword": "team meeting creative",
+    "feature_keywords": [
+      "code",
+      "design",
+      "rocket"
+    ]
+  },
+  "content": {
+    "hero": {
+      "headline": "Geleceği Şekillendiriyoruz",
+      "subheadline": "İşletmeniz için en modern teknolojileri kullanarak dijital dünyada fark yaratın.",
+      "ctaButtonText": "Hemen Başlayın"
+    },
+    "about": {
+      "title": "Biz Kimiz?",
+      "description": "2010 yılından beri sektörde öncü çözümler üretiyoruz. Müşteri memnuniyeti odaklı yaklaşımımızla markanızı zirveye taşıyoruz.",
+      "stats": [
+        {
+          "label": "Tamamlanan Proje",
+          "value": "500+"
+        },
+        {
+          "label": "Mutlu Müşteri",
+          "value": "150+"
+        },
+        {
+          "label": "Yıllık Deneyim",
+          "value": "12"
+        }
+      ]
+    },
+    "services": [
+      {
+        "title": "Web Tasarım",
+        "description": "Mobil uyumlu, hızlı ve modern web siteleri.",
+        "icon": "💻"
+      },
+      {
+        "title": "SEO Optimizasyonu",
+        "description": "Google'da ilk sıralarda yerinizi alın.",
+        "icon": "🚀"
+      },
+      {
+        "title": "Sosyal Medya",
+        "description": "Markanızın sesini dünyaya duyurun.",
+        "icon": "📱"
+      }
+    ],
+    "testimonials": [
+      {
+        "name": "Ahmet Yılmaz",
+        "role": "CEO, Tech Corp",
+        "comment": "Harika bir ekip, işlerini zamanında ve mükemmel yapıyorlar."
+      },
+      {
+        "name": "Ayşe Demir",
+        "role": "Pazarlama Müdürü",
+        "comment": "Satışlarımız %200 arttı. Kesinlikle tavsiye ediyorum."
+      }
+    ],
+    "process": [
+      {
+        "step": "01",
+        "title": "Keşif ve Analiz",
+        "description": "İhtiyaçlarınızı dinliyor, hedeflerinizi belirliyoruz."
+      },
+      {
+        "step": "02",
+        "title": "Tasarım ve Planlama",
+        "description": "Modern ve kullanıcı dostu tasarımlar oluşturuyoruz."
+      },
+      {
+        "step": "03",
+        "title": "Geliştirme ve Teslimat",
+        "description": "Kodlama ve testleri tamamlayıp projenizi teslim ediyoruz."
+      }
+    ],
+    "faq": [
+      {
+        "question": "Proje teslim süresi ne kadar?",
+        "answer": "Projenin kapsamına göre 2-6 hafta arasında değişmektedir."
+      },
+      {
+        "question": "Ödeme koşulları nelerdir?",
+        "answer": "%50 peşin, %50 teslimat sonrası ödeme planı sunuyoruz."
+      },
+      {
+        "question": "Destek hizmeti veriyor musunuz?",
+        "answer": "Evet, teslim sonrası 6 ay ücretsiz teknik destek sağlıyoruz."
+      }
+    ],
+    "contact": {
+      "address": "Levent, Büyükdere Cd. No:1, İstanbul",
+      "phone": "+90 555 123 45 67",
+      "email": "info@modernajans.com",
+      "map_query": "Istanbul"
+    }
+  }
+}

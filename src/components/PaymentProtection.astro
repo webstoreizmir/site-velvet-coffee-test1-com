@@ -1,0 +1,94 @@
+---
+import siteConfig from '../data/site-config.json';
+
+const isPaid = (siteConfig as any).is_paid ?? false;
+
+// Eğer ödeme yapılmışsa hiçbir şey render etme
+if (isPaid) {
+  return null;
+}
+---
+
+{/* Koruma Bantı */}
+<div class="fixed bottom-0 left-0 w-full bg-black text-white py-4 px-6 z-[9999] flex items-center justify-between shadow-2xl border-t-4 border-red-600">
+  <p class="text-lg font-bold tracking-wide">
+    ⚠️ BU SİTE DEMO SÜRÜMÜDÜR - YAYINA ALMAK İÇİN ÖDEMEYİ TAMAMLAYINIZ
+  </p>
+  <a 
+    href="#" 
+    class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+  >
+    Şimdi Öde
+  </a>
+</div>
+
+<script>
+  // Sağ tık engelleme
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    alert('Sağ tık devre dışı bırakıldı!');
+  });
+
+  // F12 ve diğer developer tools kısayollarını engelleme
+  document.addEventListener('keydown', (e) => {
+    // F12
+    if (e.key === 'F12') {
+      e.preventDefault();
+      alert('Developer tools devre dışı bırakıldı!');
+      return false;
+    }
+    
+    // Ctrl+Shift+I veya Cmd+Option+I (Inspect)
+    if ((e.ctrlKey && e.shiftKey && e.key === 'I') || 
+        (e.metaKey && e.altKey && e.key === 'I')) {
+      e.preventDefault();
+      alert('Developer tools devre dışı bırakıldı!');
+      return false;
+    }
+    
+    // Ctrl+Shift+J veya Cmd+Option+J (Console)
+    if ((e.ctrlKey && e.shiftKey && e.key === 'J') || 
+        (e.metaKey && e.altKey && e.key === 'J')) {
+      e.preventDefault();
+      alert('Developer tools devre dışı bırakıldı!');
+      return false;
+    }
+    
+    // Ctrl+U veya Cmd+U (View Source)
+    if ((e.ctrlKey && e.key === 'U') || (e.metaKey && e.key === 'U')) {
+      e.preventDefault();
+      alert('Kaynak kodunu görüntüleme devre dışı bırakıldı!');
+      return false;
+    }
+    
+    // Ctrl+S veya Cmd+S (Save)
+    if ((e.ctrlKey && e.key === 's') || (e.metaKey && e.key === 's')) {
+      e.preventDefault();
+      alert('Sayfayı kaydetme devre dışı bırakıldı!');
+      return false;
+    }
+  });
+
+  // Metin seçimini engelleme
+  document.addEventListener('selectstart', (e) => {
+    e.preventDefault();
+    return false;
+  });
+
+  // Kopyalamayı engelleme
+  document.addEventListener('copy', (e) => {
+    e.preventDefault();
+    alert('Kopyalama devre dışı bırakıldı!');
+    return false;
+  });
+</script>
+
+<style>
+  /* Metin seçimini CSS ile de engelle */
+  body {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+</style>

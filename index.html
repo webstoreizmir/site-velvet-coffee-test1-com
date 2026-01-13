@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İzmir WebStore | AI Site Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg-color: #0f172a;
+--card-bg: #1e293b;
+--input-bg: #334155;
+--text-main: #f1f5f9;
+--text-muted: #94a3b8;
+--primary: #38bdf8;
+--primary-hover: #0ea5e9;
+--border: #475569;
+}
+
+body { 
+        font-family: 'Inter', sans-serif; 
+        background-color: var(--bg-color); 
+        color: var(--text-main); 
+        display: flex; 
+        justify-content: center; 
+        padding: 40px 20px; 
+        min-height: 100vh; 
+        margin: 0; 
+        line-height: 1.6;
+    }
+
+    .container { 
+        background-color: var(--card-bg); 
+        padding: 50px; 
+        border-radius: 24px; 
+        width: 100%; 
+        max-width: 900px; 
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
+        border: 1px solid var(--border); 
+    }
+    
+    h1 { text-align: center; color: var(--primary); margin: 0 0 10px 0; font-size: 36px; font-weight: 800; letter-spacing: -1px; }
+    p.subtitle { text-align: center; color: var(--text-muted); margin-bottom: 50px; font-size: 18px; }
+    
+    .section-box {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        padding: 25px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+    }
+
+    .section-header { 
+        color: var(--primary); 
+        margin: 0 0 20px 0; 
+        font-weight: 700; 
+        font-size: 18px; 
+        display: flex; 
+        align-items: center; 
+        gap: 10px; 
+        text-transform: uppercase; 
+        letter-spacing: 1px; 
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 10px;
+    }
+
+    .form-row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .form-group { margin-bottom: 20px; flex: 1; min-width: 250px; }
+    
+    label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-muted); font-size: 13px; text-transform: uppercase; }
+    
+    input, textarea, select { 
+        width: 100%; 
+        padding: 16px; 
+        background: var(--bg-color); 
+        border: 1px solid var(--border); 
+        color: #fff; 
+        border-radius: 12px; 
+        box-sizing: border-box; 
+        transition: all 0.3s ease; 
+        font-size: 15px; 
+        font-family: 'Inter', sans-serif;
+    }
+    
+    input:focus, textarea:focus, select:focus { 
+        outline: none; 
+        border-color: var(--primary); 
+        box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1); 
+        background: #162032;
+    }
+    
+    textarea { resize: vertical; min-height: 100px; }
+
+    button { 
+        width: 100%; 
+        padding: 24px; 
+        background: linear-gradient(135deg, var(--primary), #2563eb); 
+        border: none; 
+        color: white; 
+        font-size: 20px; 
+        font-weight: 800; 
+        border-radius: 16px; 
+        cursor: pointer; 
+        transition: 0.3s; 
+        margin-top: 20px; 
+        box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.3); 
+        letter-spacing: 0.5px;
+    }
+    
+    button:hover { 
+        transform: translateY(-2px); 
+        box-shadow: 0 20px 25px -5px rgba(14, 165, 233, 0.5); 
+        filter: brightness(1.1);
+    }
+    
+    button:disabled { 
+        background: #475569; 
+        cursor: wait; 
+        transform: none; 
+        box-shadow: none; 
+        opacity: 0.7;
+    }
+
+    .helper-text { font-size: 12px; color: #64748b; margin-top: 6px; font-style: italic; }
+
+    .status { margin-top: 30px; padding: 25px; border-radius: 16px; text-align: center; font-size: 16px; display: none; line-height: 1.6; animation: fadeIn 0.5s; }
+    .success { background-color: rgba(6, 78, 59, 0.5); color: #34d399; border: 1px solid #059669; }
+    .error { background-color: rgba(69, 10, 10, 0.5); color: #f87171; border: 1px solid #b91c1c; }
+    
+    a { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🚀 Site Sihirbazı</h1>
+<p class="subtitle">Detaylı bilgileri girin, arkanıza yaslanın.</p>
+
+<form id="siteForm">
+    
+    <!-- Bildirim Bölümü -->
+    <div class="section-box" style="border-color: var(--primary);">
+        <div class="section-header">📧 Bildirim Bilgileri</div>
+        <div class="form-group">
+            <label>Sonuç E-postası (Siteniz hazır olduğunda buraya bilgi gelecek)</label>
+            <input type="email" id="notificationEmail" placeholder="sizin.mailiniz@ornek.com" required style="border-color: var(--primary);">
+        </div>
+    </div>
+
+    <div class="section-box">
+        <div class="section-header">🏢 Kurumsal Kimlik</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>İşletme Adı</label>
+                <input type="text" id="businessName" placeholder="Örn: Vega Mimarlık" required>
+            </div>
+            <div class="form-group">
+                <label>Sektör</label>
+                <input type="text" id="sector" placeholder="Örn: İç Mimarlık / Diş Hekimliği" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Domain (Alan Adı)</label>
+                <input type="text" id="customDomain" placeholder="Örn: vegamimarlik.com" required>
+                <div class="helper-text">http/https veya www yazmayın. Sadece alan adı.</div>
+            </div>
+            <div class="form-group">
+                <label>Slogan / Motto</label>
+                <input type="text" id="slogan" placeholder="Örn: Hayallerinizi İnşa Ediyoruz">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Kurumsal Tanıtım (Detaylı Bilgi İçin)</label>
+            <textarea id="description" rows="5" placeholder="İşletmenizi detaylı anlatın. Kaç yıldır sektördesiniz? Uzmanlık alanlarınız neler? Rakiplerinizden farkınız ne? (Ne kadar detay, o kadar iyi site.)" required></textarea>
+        </div>
+    </div>
+
+    <!-- YENİ BÖLÜM: Görseller ve Logo -->
+    <div class="section-box">
+        <div class="section-header">📸 Logo & Görseller (Opsiyonel)</div>
+        <p style="font-size:13px; color:#94a3b8; margin-bottom:15px;">Kendi görsellerinizi kullanmak isterseniz linklerini buraya yapıştırın. Boş bırakırsanız sizin için en uygun stok fotoğrafları seçecektir.</p>
+        
+        <div class="form-group">
+            <label>Logo URL (PNG veya JPG)</label>
+            <input type="url" id="logoUrl" placeholder="https://ornek.com/logo.png">
+            <div class="helper-text">Logonuzun internetteki adresi. Boş bırakırsanız işletme adı yazılır.</div>
+        </div>
+        <div class="form-group">
+            <label>Kapak (Hero) Görseli URL</label>
+            <input type="url" id="heroImageUrl" placeholder="https://ornek.com/banner.jpg">
+            <div class="helper-text">Ana sayfadaki büyük görsel. Boş bırakırsanız AI üretir.</div>
+        </div>
+    </div>
+
+    <div class="section-box">
+        <div class="section-header">📝 Hizmetler & İçerik</div>
+        <div class="form-group">
+            <label>Hizmetler / Ürünler (Virgülle ayırın)</label>
+            <textarea id="servicesList" rows="3" placeholder="Örn: Villa Tasarımı, Ofis Yenileme, 3D Modelleme, Danışmanlık" required></textarea>
+        </div>
+        <div class="form-group">
+            <label>Neden Bizi Seçmeliler? (Maddeler Halinde)</label>
+            <textarea id="whyUs" rows="3" placeholder="Örn: 1. 20 Yıllık Deneyim, 2. Ücretsiz Keşif, 3. Zamanında Teslim"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Müşteri Yorumları (Varsa)</label>
+            <textarea id="testimonials" rows="3" placeholder="Örn: 'Harika iş çıkardılar.' - Ahmet Y., 'Çok memnun kaldık.' - Ayşe K."></textarea>
+            <div class="helper-text">Boş bırakırsanız taslak yorumlar üretilecektir.</div>
+        </div>
+    </div>
+
+    <div class="section-box">
+        <div class="section-header">🌍 İletişim & Harita</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Telefon (Sitede görünecek)</label>
+                <input type="text" id="phone" placeholder="+90 555 ...">
+            </div>
+            <div class="form-group">
+                <label>WhatsApp Numarası</label>
+                <input type="text" id="whatsapp" placeholder="90555... (Sadece rakam)">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>E-posta (Sitede görünecek)</label>
+            <input type="text" id="publicEmail" placeholder="info@...">
+        </div>
+        <div class="form-group">
+            <label>Açık Adres (Tam Adres)</label>
+            <textarea id="address" rows="2" placeholder="Ofis adresi..."></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Instagram Linki</label>
+                <input type="text" id="instagram" placeholder="https://instagram.com/...">
+            </div>
+            <div class="form-group">
+                <label>LinkedIn / Diğer Link</label>
+                <input type="text" id="linkedin" placeholder="https://linkedin.com/...">
+            </div>
+        </div>
+    </div>
+
+    <div class="section-box">
+        <div class="section-header">🎨 Tasarım Tercihleri</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Hedef Kitle</label>
+                <input type="text" id="targetAudience" placeholder="Örn: Lüks Konut Alıcıları, Kurumsal Firmalar">
+            </div>
+            <div class="form-group">
+                <label>Tasarım Tarzı</label>
+                <select id="designStyle">
+                    <option value="Kurumsal ve Ciddi">Kurumsal ve Ciddi (Mavi/Gri tonlar)</option>
+                    <option value="Minimalist ve Modern">Minimalist ve Modern (Beyaz/Siyah/Gri)</option>
+                    <option value="Lüks ve Premium">Lüks ve Premium (Altın/Siyah/Lacivert)</option>
+                    <option value="Canlı ve Yaratıcı">Canlı ve Yaratıcı (Renkli/Enerjik)</option>
+                    <option value="Teknolojik ve Dark Mode">Teknolojik ve Dark Mode (Koyu/Neon)</option>
+                    <option value="Doğal ve Organik">Doğal ve Organik (Yeşil/Toprak tonları)</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Özel Renk Tercihi (Varsa)</label>
+            <input type="text" id="colorPreference" placeholder="Örn: Turkuaz ve Gri, ya da #FF0000">
+        </div>
+    </div>
+
+    <button type="submit" id="btnSubmit">✨ SİTEYİ OLUŞTUR</button>
+</form>
+<div id="statusMessage" class="status"></div>
+</div>
+<script>
+<script>
+    // 👇 BURAYA KENDİ WEBHOOK ADRESİNİ YAPIŞTIR 👇
+    const WEBHOOK_URL = "https://n8n.izmirwebstore.com/webhook/crate-site"; 
+
+    document.getElementById('siteForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('btnSubmit');
+        const status = document.getElementById('statusMessage');
+        
+        // Buton durumu (Loading)
+        btn.innerHTML = "⚙️ Siteniz Tasarlanıyor... (Lütfen Bekleyin)";
+        btn.disabled = true;
+        status.style.display = 'none';
+
+        // Verileri topla
+        const data = {
+            // Bildirim
+            email: document.getElementById('notificationEmail').value,
+
+            // Kimlik
+            businessName: document.getElementById('businessName').value,
+            slogan: document.getElementById('slogan').value,
+            customDomain: document.getElementById('customDomain').value.replace(/^https?:\/\//, '').replace(/^www\./, ''),
+            sector: document.getElementById('sector').value,
+            description: document.getElementById('description').value,
+
+            // Görseller
+            logoUrl: document.getElementById('logoUrl').value,
+            heroImageUrl: document.getElementById('heroImageUrl').value,
+
+            // İçerik
+            servicesList: document.getElementById('servicesList').value,
+            whyUs: document.getElementById('whyUs').value,
+            testimonials: document.getElementById('testimonials').value,
+            
+            // İletişim
+            phone: document.getElementById('phone').value,
+            whatsapp: document.getElementById('whatsapp').value,
+            publicEmail: document.getElementById('publicEmail').value,
+            address: document.getElementById('address').value,
+            instagram: document.getElementById('instagram').value,
+            linkedin: document.getElementById('linkedin').value,
+            
+            // Tasarım
+            targetAudience: document.getElementById('targetAudience').value,
+            designStyle: document.getElementById('designStyle').value,
+            colorPreference: document.getElementById('colorPreference').value
+        };
+
+        try {
+            const response = await fetch(WEBHOOK_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                // Başarılı olursa formu ve eski butonu gizle veya değiştir
+                btn.style.display = 'none'; // Gönder butonunu yok et
+
+                status.innerHTML = `
+                    <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; padding: 25px; border-radius: 16px; margin-bottom: 25px; text-align: center;">
+                        <h3 style="margin:0 0 10px 0; color:#10b981; font-size:24px;">✅ Siteniz Hazırlanıyor!</h3>
+                        <p style="color:#cbd5e1; font-size:15px; margin:0;"Siteniz Tasarlanıyor. Mail kutunuzu kontrol edin.</p>
+                    </div>
+
+                    <div style="background: #1e293b; border: 1px solid #334155; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);">
+                        <p style="color:#f1f5f9; font-size:16px; font-weight:600; margin-bottom:20px;">
+                            Sitenizin <u>${data.customDomain}</u> adresinde kalıcı olması için aktivasyonu tamamlayın:
+                        </p>
+                        
+                        <a href="https://www.shopier.com/ShowProductNew/products.php?id=43115248" target="_blank" style="display: block; width: 100%; padding: 20px; background: linear-gradient(135deg, #10b981, #059669); color: white; font-size: 20px; font-weight: 800; border-radius: 12px; text-decoration: none; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4); transition: transform 0.2s;">
+                            💳 Ödemeyi Güvenle Yap (Shopier)
+                        </a>
+                        
+                        <div style="margin-top: 15px; font-size: 13px; color: #64748b; display: flex; justify-content: center; gap: 15px;">
+                            <span>🔒 256-bit SSL</span>
+                            <span>🛡️ 3D Secure</span>
+                            <span>✅ Anında Teslim</span>
+                        </div>
+                    </div>
+                `;
+                status.className = "status"; // Kendi stilini kullanmasın diye sıfırladık
+                status.style.display = 'block';
+                status.style.backgroundColor = 'transparent'; // Arka plan şeffaf
+                status.style.border = 'none';
+                
+                // Sayfayı yukarı kaydır ki mesajı görsün
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
+            } else {
+                throw new Error("Sunucu hatası");
+            }
+        } catch (error) {
+            console.error(error);
+            status.innerHTML = `
+                <h3 style="margin:0">❌ Bir Sorun Oluştu</h3>
+                <p>Lütfen daha sonra tekrar deneyin veya bizimle iletişime geçin.</p>
+            `;
+            status.className = "status error";
+            status.style.display = 'block';
+            btn.innerHTML = "Tekrar Dene";
+            btn.disabled = false;
+        }
+    });
+</script>
+</script>
+</body>
+</html>

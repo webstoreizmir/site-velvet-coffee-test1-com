@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply text-slate-800 bg-slate-50 leading-relaxed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-6 sm:px-8;
+  }
+
+  .btn-primary {
+    @apply px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-xl flex items-center justify-center gap-2;
+    background-color: rgb(var(--color-primary));
+    color: white;
+  }
+
+  .btn-secondary {
+    @apply px-8 py-4 rounded-full font-semibold bg-white text-slate-900 border border-slate-200 transition-all duration-300 hover:bg-slate-50 hover:border-slate-300 shadow-sm hover:shadow-md flex items-center justify-center gap-2;
+  }
+
+  .input-field {
+    /* Hata veren kısmı kaldırdık ve güvenli hale getirdik */
+    @apply w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 text-slate-900 placeholder-gray-400 focus:outline-none focus:ring-4 transition-all duration-300;
+
+    /* CSS değişkenlerini burada manuel tanımlıyoruz, Tailwind @apply içinde değil */
+    border-color: rgb(var(--color-primary));
+    --tw-ring-color: rgba(var(--color-primary), 0.1);
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[color:rgb(var(--color-primary))] to-[color:rgb(var(--color-secondary))];
+  }
+}

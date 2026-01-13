@@ -1,0 +1,75 @@
+---
+interface Props {
+  headline: string;
+  subheadline: string;
+  ctaButtonText: string;
+  imageKeyword: string;
+}
+
+const { headline, subheadline, ctaButtonText, imageKeyword } = Astro.props;
+
+// Anahtar kelimeyi analiz et
+const keyword = imageKeyword.toLowerCase();
+let collection = "modern-luxury-architecture"; // Varsayılan
+
+// Sektöre göre Unsplash Koleksiyonu seçimi
+if (keyword.includes('cafe') || keyword.includes('coffee') || keyword.includes('restaurant') || keyword.includes('food')) {
+    collection = "coffee-shop-interior";
+} else if (keyword.includes('tech') || keyword.includes('software') || keyword.includes('digital')) {
+    collection = "technology-office";
+} else if (keyword.includes('health') || keyword.includes('clinic') || keyword.includes('dental')) {
+    collection = "medical-clinic-modern";
+} else if (keyword.includes('gym') || keyword.includes('fitness') || keyword.includes('sport')) {
+    collection = "gym-fitness-center";
+}
+
+// LoremFlickr yerine Unsplash Source mantığı (Daha isabetli)
+const lockId = Math.floor(Math.random() * 500);
+// Unsplash'ta arama yaparak en iyi sonucu bulur
+const bgImage = `https://source.unsplash.com/1920x1080/?${collection},${encodeURIComponent(keyword)}&sig=${lockId}`;
+// YEDEK PLAN: Eğer Unsplash Source çalışmazsa LoremFlickr (Ama daha spesifik)
+const backupImage = `https://loremflickr.com/1920/1080/${encodeURIComponent(keyword)},interior/all?lock=${lockId}`;
+
+---
+
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- Background Image -->
+  <div class="absolute inset-0 z-0">
+    <img 
+      src={backupImage} 
+      alt="Hero Background" 
+      class="w-full h-full object-cover"
+      loading="eager"
+    />
+    <!-- Koyu Overlay -->
+    <div class="absolute inset-0 bg-slate-900/60"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+  </div>
+  
+  <!-- Content -->
+  <div class="container mx-auto px-6 relative z-10 pt-20 text-center">
+    <div class="max-w-5xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm font-medium mb-8 backdrop-blur-md animate-fade-in">
+        <span class="w-2 h-2 rounded-full bg-[rgb(var(--color-primary))] animate-pulse"></span>
+        Profesyonel Çözümler
+      </div>
+
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-bold mb-8 text-white leading-tight drop-shadow-2xl">
+        {headline}
+      </h1>
+      
+      <p class="text-lg md:text-2xl text-slate-200 mb-12 font-body max-w-3xl mx-auto leading-relaxed text-shadow">
+        {subheadline}
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-5 justify-center">
+        <a 
+          href="#contact"
+          class="px-8 py-4 text-lg font-bold text-white rounded-xl bg-[rgb(var(--color-primary))] hover:bg-[rgb(var(--color-secondary))] transition-all duration-300 shadow-xl shadow-[rgb(var(--color-primary))]/30 transform hover:-translate-y-1"
+        >
+          {ctaButtonText}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,95 @@
+---
+import type { SiteConfig } from '../types/config';
+import siteConfig from '../data/site-config.json';
+import '../styles/global.css';
+import PaymentProtection from '../components/PaymentProtection.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const config = siteConfig as SiteConfig;
+const { title = config.metadata.title, description = config.metadata.description } = Astro.props;
+
+// Hex renkleri RGB'ye çevir
+function hexToRgb(hex: string): string {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!result) return '0 0 0';
+  return `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}`;
+}
+
+const colors = {
+  primary: hexToRgb(config.theme.colors.primary),
+  secondary: hexToRgb(config.theme.colors.secondary),
+  background: hexToRgb(config.theme.colors.background),
+  text: hexToRgb(config.theme.colors.text),
+};
+---
+
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href={`https://fonts.googleapis.com/css2?family=${config.theme.fonts.heading.replace(' ', '+')}:wght@400;500;600;700;800&family=${config.theme.fonts.body.replace(' ', '+')}:wght@300;400;500;600&display=swap`}
+      rel="stylesheet"
+    />
+    
+    <title>{title}</title>
+    
+    <style is:global define:vars={{ 
+      colorPrimary: colors.primary,
+      colorSecondary: colors.secondary,
+      colorBackground: colors.background,
+      colorText: colors.text,
+      fontHeading: `'${config.theme.fonts.heading}', sans-serif`,
+      fontBody: `'${config.theme.fonts.body}', sans-serif`,
+    }}>
+      :root {
+        --color-primary: var(--colorPrimary);
+        --color-secondary: var(--colorSecondary);
+        --color-background: var(--colorBackground);
+        --color-text: var(--colorText);
+        --font-heading: var(--fontHeading);
+        --font-body: var(--fontBody);
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html {
+        scroll-behavior: smooth;
+        font-family: var(--font-body);
+      }
+      
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, 
+          rgb(var(--color-background)) 0%, 
+          rgb(var(--color-background)) 100%
+        );
+        color: rgb(var(--color-text));
+      }
+      
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+      }
+    </style>
+  </head>
+  <body>
+    <slot />
+    <PaymentProtection />
+  </body>
+</html>

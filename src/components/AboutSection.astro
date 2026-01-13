@@ -1,0 +1,80 @@
+---
+interface Stat {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  stats: Stat[];
+  imageKeyword: string;
+}
+
+const { title, description, stats, imageKeyword } = Astro.props;
+
+const keyword = imageKeyword.toLowerCase();
+let category = "business"; // Varsayılan
+
+if (keyword.includes('cafe') || keyword.includes('coffee') || keyword.includes('restaurant')) {
+    category = "coffee-shop";
+} else if (keyword.includes('tech')) {
+    category = "startup-office";
+} else if (keyword.includes('health')) {
+    category = "doctor";
+}
+
+const lockId = Math.floor(Math.random() * 500);
+const imgUrl = `https://loremflickr.com/800/1000/${encodeURIComponent(category)},team/all?lock=${lockId}`;
+---
+
+<section id="about" class="py-24 relative overflow-hidden bg-white">
+  <div class="container mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center gap-16">
+      
+      <!-- Image Side -->
+      <div class="w-full md:w-1/2 relative group">
+        <div class="absolute -top-4 -left-4 w-full h-full border-2 border-[rgb(var(--color-primary))] rounded-3xl -z-10 transform translate-x-4 translate-y-4"></div>
+        <img 
+          src={imgUrl} 
+          alt="Hakkımızda" 
+          class="relative rounded-3xl shadow-2xl w-full object-cover h-[500px] hover:scale-[1.01] transition-transform duration-700"
+        />
+        <!-- Badge -->
+        <div class="absolute bottom-8 right-[-20px] bg-white p-6 rounded-xl shadow-xl border-l-8 border-[rgb(var(--color-primary))] hidden md:block">
+          <p class="text-4xl font-bold text-[rgb(var(--color-primary))]">10+</p>
+          <p class="text-xs font-bold text-slate-600 uppercase tracking-wider mt-1">Yıllık Tecrübe</p>
+        </div>
+      </div>
+
+      <!-- Content Side -->
+      <div class="w-full md:w-1/2">
+        <span class="text-[rgb(var(--color-primary))] font-bold tracking-wider uppercase text-sm mb-2 block">Hikayemiz</span>
+        <h2 class="text-3xl md:text-5xl font-heading font-bold mb-6 text-slate-900 leading-tight">
+          {title}
+        </h2>
+        <p class="text-lg text-slate-600 leading-relaxed font-body mb-10 border-l-4 border-slate-200 pl-4">
+          {description}
+        </p>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 gap-4 mb-10">
+          {stats && stats.map(stat => (
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100">
+              <p class="text-2xl font-bold text-[rgb(var(--color-primary))] mb-1">{stat.value}</p>
+              <p class="text-sm font-medium text-slate-500">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+        
+         <a 
+          href="#contact" 
+          class="inline-flex items-center gap-2 text-[rgb(var(--color-primary))] font-bold text-lg hover:text-[rgb(var(--color-secondary))] transition-colors group"
+        >
+          Bizimle Tanışın
+          <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,39 @@
+---
+interface ProcessStep {
+  step: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  steps: ProcessStep[];
+}
+
+const { steps } = Astro.props;
+---
+
+<section class="py-24 bg-white relative overflow-hidden">
+  <div class="container-custom">
+    <div class="text-center mb-20">
+      <span class="text-[rgb(var(--color-primary))] font-bold tracking-wider uppercase text-sm mb-2 block">Çalışma Şeklimiz</span>
+      <h2 class="text-4xl font-heading font-bold text-slate-900">Süreç Nasıl İşliyor?</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+      <!-- Connecting Line (Desktop) -->
+      <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-100 -z-10"></div>
+
+      {steps.map((item, index) => (
+        <div class="relative group">
+          <div class="w-24 h-24 mx-auto bg-white rounded-full border-4 border-slate-50 flex items-center justify-center mb-8 shadow-lg group-hover:border-[rgb(var(--color-primary))] group-hover:scale-110 transition-all duration-300 relative z-10">
+            <span class="text-3xl font-bold text-[rgb(var(--color-primary))]">{item.step}</span>
+          </div>
+          <div class="text-center px-4">
+            <h3 class="text-xl font-bold mb-4 text-slate-900">{item.title}</h3>
+            <p class="text-slate-600 leading-relaxed">{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
