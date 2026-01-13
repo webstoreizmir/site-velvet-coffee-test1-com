@@ -1,120 +1,114 @@
 {
-  "is_paid": false,
   "metadata": {
-    "title": "Modern Ajans Pro",
-    "description": "Profesyonel dijital çözümler."
+    "title": "Velvet Coffee Roastery - İzmir'in En İyi Nitelikli Kahvesi",
+    "description": "İzmir'de taze kavrulmuş kahve çekirdekleri, eşsiz tatlılar ve rahat bir çalışma ortamı sunan 3. nesil kahve dükkanı."
   },
   "theme": {
     "colors": {
-      "primary": "#2563eb",
-      "secondary": "#1e40af",
-      "background": "#0f172a",
-      "text": "#f8fafc"
+      "primary": "#4A3B2A",
+      "secondary": "#796A59",
+      "background": "#F5F5DC",
+      "text": "#333"
     },
     "fonts": {
-      "heading": "Montserrat",
-      "body": "Inter"
+      "heading": "Poppins",
+      "body": "Roboto"
     },
     "style": "modern"
   },
   "images": {
-    "hero_keyword": "modern office architecture glass",
-    "about_keyword": "team meeting creative",
+    "hero_keyword": "coffee",
+    "about_keyword": "roastery",
     "feature_keywords": [
-      "code",
-      "design",
-      "rocket"
+      "espresso",
+      "filter coffee",
+      "beans"
     ]
   },
   "content": {
     "hero": {
-      "headline": "Geleceği Şekillendiriyoruz",
-      "subheadline": "İşletmeniz için en modern teknolojileri kullanarak dijital dünyada fark yaratın.",
-      "ctaButtonText": "Hemen Başlayın"
+      "headline": "İzmir'in Kalbinde Taptaze Kahve Deneyimi",
+      "subheadline": "En kaliteli çekirdeklerden özenle hazırlanmış kahvelerimizle tanışın.",
+      "ctaButtonText": "Menüyü Keşfet"
     },
     "about": {
-      "title": "Biz Kimiz?",
-      "description": "2010 yılından beri sektörde öncü çözümler üretiyoruz. Müşteri memnuniyeti odaklı yaklaşımımızla markanızı zirveye taşıyoruz.",
+      "title": "Velvet Coffee Hakkında",
+      "description": "Velvet Coffee Roastery olarak, en taze ve kaliteli kahve çekirdeklerini yerinde kavurarak İzmir'in kahve kültürüne yeni bir soluk getiriyoruz. Amacımız, her fincan kahvenizde eşsiz bir deneyim sunmak. Rahat çalışma ortamımız ve lezzetli tatlılarımızla gününüzü tatlandırın.",
       "stats": [
         {
-          "label": "Tamamlanan Proje",
-          "value": "500+"
+          "label": "Kahve Çeşidi",
+          "value": "20+"
         },
         {
-          "label": "Mutlu Müşteri",
-          "value": "150+"
-        },
-        {
-          "label": "Yıllık Deneyim",
-          "value": "12"
+          "label": "Yıllık Tecrübe",
+          "value": "5+"
         }
       ]
     },
     "services": [
       {
-        "title": "Web Tasarım",
-        "description": "Mobil uyumlu, hızlı ve modern web siteleri.",
-        "icon": "💻"
+        "title": "Espresso Bar",
+        "description": "Usta baristalarımızın elinden çıkan, özenle hazırlanmış espresso bazlı içecekler.",
+        "icon": "☕"
       },
       {
-        "title": "SEO Optimizasyonu",
-        "description": "Google'da ilk sıralarda yerinizi alın.",
-        "icon": "🚀"
+        "title": "Filtre Kahve",
+        "description": "Farklı demleme yöntemleriyle hazırlanan, zengin aromalı filtre kahve seçenekleri.",
+        "icon": "⚗️"
       },
       {
-        "title": "Sosyal Medya",
-        "description": "Markanızın sesini dünyaya duyurun.",
-        "icon": "📱"
-      }
-    ],
-    "testimonials": [
-      {
-        "name": "Ahmet Yılmaz",
-        "role": "CEO, Tech Corp",
-        "comment": "Harika bir ekip, işlerini zamanında ve mükemmel yapıyorlar."
-      },
-      {
-        "name": "Ayşe Demir",
-        "role": "Pazarlama Müdürü",
-        "comment": "Satışlarımız %200 arttı. Kesinlikle tavsiye ediyorum."
+        "title": "Çekirdek Satışı",
+        "description": "Evde kendi kahvenizi demlemek isteyenler için taze kavrulmuş çekirdeklerimiz.",
+        "icon": "🌱"
       }
     ],
     "process": [
       {
         "step": "01",
-        "title": "Keşif ve Analiz",
-        "description": "İhtiyaçlarınızı dinliyor, hedeflerinizi belirliyoruz."
+        "title": "Seçim",
+        "description": "En iyi kahve çekirdeklerini seçiyoruz."
       },
       {
         "step": "02",
-        "title": "Tasarım ve Planlama",
-        "description": "Modern ve kullanıcı dostu tasarımlar oluşturuyoruz."
+        "title": "Kavurma",
+        "description": "Çekirdekleri özenle kavuruyoruz."
       },
       {
         "step": "03",
-        "title": "Geliştirme ve Teslimat",
-        "description": "Kodlama ve testleri tamamlayıp projenizi teslim ediyoruz."
+        "title": "Demleme",
+        "description": "Mükemmel kahve deneyimini sunuyoruz."
       }
     ],
     "faq": [
       {
-        "question": "Proje teslim süresi ne kadar?",
-        "answer": "Projenin kapsamına göre 2-6 hafta arasında değişmektedir."
+        "question": "Kahveleriniz nereden geliyor?",
+        "answer": "Dünyanın farklı bölgelerinden özenle seçilmiş, en kaliteli kahve çekirdeklerini kullanıyoruz."
       },
       {
-        "question": "Ödeme koşulları nelerdir?",
-        "answer": "%50 peşin, %50 teslimat sonrası ödeme planı sunuyoruz."
+        "question": "Çalışma saatleriniz nelerdir?",
+        "answer": "Haftanın her günü 08:00 - 22:00 saatleri arasında açığız."
       },
       {
-        "question": "Destek hizmeti veriyor musunuz?",
-        "answer": "Evet, teslim sonrası 6 ay ücretsiz teknik destek sağlıyoruz."
+        "question": "Wi-Fi hizmetiniz var mı?",
+        "answer": "Evet, tüm müşterilerimize ücretsiz Wi-Fi hizmeti sunuyoruz."
+      },
+      {
+        "question": "Otoparkınız var mı?",
+        "answer": "Yakın çevrede halka açık otopark alanları bulunmaktadır."
+      }
+    ],
+    "testimonials": [
+      {
+        "name": "Ayşe K.",
+        "role": "Müşteri",
+        "comment": "İzmir'deki en iyi kahve! Çalışma ortamı da çok güzel."
       }
     ],
     "contact": {
-      "address": "Levent, Büyükdere Cd. No:1, İstanbul",
-      "phone": "+90 555 123 45 67",
-      "email": "info@modernajans.com",
-      "map_query": "Istanbul"
+      "address": "Bostanlı Mahallesi, Cemal Gürsel Caddesi No: 123, İzmir",
+      "phone": "0232 123 45 67",
+      "email": "info@velvetcoffee.com",
+      "map_query": "Velvet Coffee Roastery Bostanlı İzmir"
     }
   }
 }
